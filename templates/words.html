@@ -1,0 +1,64 @@
+<html>
+
+<head>
+    <style>
+        body {
+            background-color: #2b6574;
+            color: rgb(236, 234, 84);
+            font-family: 'Comic Sans MS';
+        }
+
+        h1 {
+            font-size: 48px;
+        }
+
+        p, a {
+            font-size: 24px;
+        }
+
+        a {
+            color: rgb(247, 145, 11);
+            font-weight: bold;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 100px auto;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>{{ title }}</h1>
+
+        <p>{{ text }}</p>
+
+
+        {% if choices %}
+
+            <p>Witch words do you want?</p>
+
+            <ul>
+                {% for choice in choices %}
+                <li>
+                    <a href="https://www.google.com/search?q={{choice}}">{{choice}}
+                    </a>
+
+                </li>
+                {% endfor %}
+            </ul>
+
+        {% else %}
+            
+            <p>THE END.</p>
+
+
+            <p><a href="{{url_for('start')}}">Play again.</a></p>
+        {% endif %}
+
+
+    </div>
+</body>
+
+</html>
