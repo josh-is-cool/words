@@ -1,4 +1,5 @@
 from flask import Flask, render_template, request 
+from match import match
 
 app = Flask(__name__)
 
@@ -19,7 +20,7 @@ def start():
 
 @app.route("/letter")
 def words():
-    letter = request.args.get('letter')
+    letter = request.args.get('letter').upper()
     match_middle = request.args.get('match_middle')
     anywhere = request.args.get('anywhere')
 
@@ -31,10 +32,10 @@ def words():
     a_file = open("words.txt")
 
     lines = a_file.read().splitlines()
-    print(match_middle, anywhere)
+    
     for line in lines:
         if anywhere:
-            if "".join(sorted(letter)) in "".join(sorted(line)):
+            if match(letter, line):
                 choices.append(line)
         elif match_middle:
             if  letter in line:
